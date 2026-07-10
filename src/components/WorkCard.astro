@@ -1,0 +1,29 @@
+---
+import type { WorkItem } from "../content/types";
+
+interface Props {
+  item: WorkItem;
+}
+
+const { item } = Astro.props;
+const Tag = item.href ? "a" : "div";
+const coverStyle = `background:linear-gradient(150deg,${item.coverFrom},${item.coverTo})`;
+---
+
+<Tag
+  class={item.comingSoon ? "card soon" : "card"}
+  href={item.href ?? undefined}
+  target={item.href ? "_blank" : undefined}
+  rel={item.href ? "noopener" : undefined}
+>
+  <div class="cover" style={coverStyle}>
+    <span class="tag">{item.tag}</span>
+  </div>
+  <div class="body">
+    <div class="meta">
+      <h3>{item.title}</h3>
+      <span class="arrow">{item.comingSoon ? "Soon" : "↗"}</span>
+    </div>
+    <p>{item.blurb}</p>
+  </div>
+</Tag>

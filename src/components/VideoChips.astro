@@ -1,0 +1,21 @@
+---
+import { videos } from "../content/videos";
+---
+
+<div class="videos">
+  <span class="vlabel">Caught on video</span>
+  {
+    videos.map((video) => (
+      <a
+        class="vchip"
+        data-src={video.embedSrc}
+        data-label={video.label}
+        href={video.fallbackHref}
+        target="_blank"
+        rel="noopener"
+      >
+        <span class="play">▶</span> {video.label}
+      </a>
+    ))
+  }
+</div>

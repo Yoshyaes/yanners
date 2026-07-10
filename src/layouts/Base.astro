@@ -1,0 +1,88 @@
+---
+import "../styles/global.css";
+
+import bodoniLatinUrl from "@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2?url";
+import bodoniLatinExtUrl from "@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-ext-wght-normal.woff2?url";
+import bodoniLatinItalicUrl from "@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-italic.woff2?url";
+import bodoniLatinExtItalicUrl from "@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-ext-wght-italic.woff2?url";
+import dmSansLatinUrl from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url";
+import dmSansLatinExtUrl from "@fontsource-variable/dm-sans/files/dm-sans-latin-ext-wght-normal.woff2?url";
+
+// Hand-authored in place of Fontsource's bundled CSS so font-display can be
+// "optional" instead of "swap": on a slow connection the browser commits to
+// the fallback face for that page load instead of reflowing mid-render once
+// the webfont arrives, which is what was driving Cumulative Layout Shift up
+// on the hero's large display type. The <link rel="preload"> below still
+// gives fast connections a good chance of the real face landing by first
+// paint. Only latin/latin-ext subsets are declared; this site's copy never
+// uses the math/symbol unicode ranges Fontsource also ships.
+const fontFaceCSS = `
+@font-face{font-family:'Bodoni Moda Variable';font-style:normal;font-display:optional;font-weight:400 900;src:url(${bodoniLatinExtUrl}) format('woff2-variations');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bodoni Moda Variable';font-style:normal;font-display:optional;font-weight:400 900;src:url(${bodoniLatinUrl}) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Bodoni Moda Variable';font-style:italic;font-display:optional;font-weight:400 900;src:url(${bodoniLatinExtItalicUrl}) format('woff2-variations');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bodoni Moda Variable';font-style:italic;font-display:optional;font-weight:400 900;src:url(${bodoniLatinItalicUrl}) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans Variable';font-style:normal;font-display:optional;font-weight:100 1000;src:url(${dmSansLatinExtUrl}) format('woff2-variations');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans Variable';font-style:normal;font-display:optional;font-weight:100 1000;src:url(${dmSansLatinUrl}) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+`;
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Ayanna Redwood-Crawford | Beauty & Lifestyle Writer, NYT Wirecutter",
+  description = "Portfolio of Ayanna Redwood-Crawford, NYT Wirecutter staff writer covering beauty, personal care and lifestyle. Browse her bylines, watch video features and get in touch.",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="theme-nightstand">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Ayanna Redwood-Crawford" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preload" as="font" type="font/woff2" href={bodoniLatinUrl} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={dmSansLatinUrl} crossorigin />
+
+    <style set:html={fontFaceCSS}></style>
+
+    <script is:inline>
+      (function () {
+        try {
+          if (localStorage.getItem("theme") === "golden") {
+            document.documentElement.classList.remove("theme-nightstand");
+            document.documentElement.classList.add("theme-golden");
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <slot />
+    <script>
+      import "../scripts/reveal";
+      import "../scripts/cursor";
+    </script>
+  </body>
+</html>

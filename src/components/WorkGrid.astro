@@ -1,0 +1,8 @@
+---
+import { work } from "../content/work";
+import WorkCard from "./WorkCard.astro";
+---
+
+<div class="work-grid">
+  {work.map((item) => <WorkCard item={item} />)}
+</div>

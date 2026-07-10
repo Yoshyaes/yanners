@@ -1,0 +1,84 @@
+---
+---
+
+<button
+  id="appearance-toggle"
+  class="appearance-toggle"
+  type="button"
+  aria-pressed="false"
+  aria-label="Switch to Golden Hour"
+>
+  <svg
+    class="icon icon-sun"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <line x1="12" y1="2" x2="12" y2="4.5"></line>
+    <line x1="12" y1="19.5" x2="12" y2="22"></line>
+    <line x1="4.22" y1="4.22" x2="5.94" y2="5.94"></line>
+    <line x1="18.06" y1="18.06" x2="19.78" y2="19.78"></line>
+    <line x1="2" y1="12" x2="4.5" y2="12"></line>
+    <line x1="19.5" y1="12" x2="22" y2="12"></line>
+    <line x1="4.22" y1="19.78" x2="5.94" y2="18.06"></line>
+    <line x1="18.06" y1="5.94" x2="19.78" y2="4.22"></line>
+  </svg>
+  <svg
+    class="icon icon-moon is-hidden"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<style>
+  .appearance-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition:
+      border-color 0.2s,
+      color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .appearance-toggle:hover,
+  .appearance-toggle:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .appearance-toggle .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .appearance-toggle .icon.is-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  import "../scripts/theme";
+</script>
